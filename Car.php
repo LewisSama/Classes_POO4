@@ -1,4 +1,6 @@
 <?php
+require_once 'Vehicle.php';
+require_once 'RechargeableInterface.php';
 class Car extends Vehicle implements LightableInterface
 {
     /**
@@ -11,12 +13,21 @@ class Car extends Vehicle implements LightableInterface
      */
     protected $energyLevel;
 
+    protected $hasParkBrake;
+
     public function __construct(string $color, int $nbSeats, string $energy)
     {
         parent::__construct($color, $nbSeats);
         $this->setEnergy($energy);
     }
-
+    public function start()
+    {
+        if ($hasParkBrake = 'true') {
+            throw new Exception('Le frein à main est enclenché');
+        } else {
+            return 'la voiture est demarrée !';
+        }
+    }
     public function getEnergy(): string
     {
         return $this->energy;
@@ -46,5 +57,9 @@ class Car extends Vehicle implements LightableInterface
     public function switchOff()
     {
         return false;
+    }
+    public function setParkBrake($hasParkBrake): void
+    {
+        $this->hasParkBrake = $hasParkBrake;
     }
 }
